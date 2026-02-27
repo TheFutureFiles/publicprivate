@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Public Private Company | Apps</title>
     <style>
+        /* General Layout */
         body {
             font-family: 'Inter', -apple-system, sans-serif;
             background: #0f172a;
@@ -20,7 +21,10 @@
         header {
             padding: 2rem;
             border-bottom: 1px solid #1e293b;
-            background: #1e293b;
+            background: #111827;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         h1 {
@@ -28,54 +32,59 @@
             margin: 0;
             color: #38bdf8;
             text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav {
+            font-weight: 800;
+            color: #64748b;
             letter-spacing: 1px;
         }
 
+        /* App Section */
         .container {
             flex: 1;
-            max-width: 800px;
+            max-width: 900px;
             margin: 4rem auto;
             padding: 0 2rem;
-            display: flex;
-            justify-content: flex-start;
         }
 
         .app-bubble {
             background: #1e293b;
-            border-radius: 20px;
-            padding: 2rem;
-            width: 220px;
-            height: 220px;
+            border-radius: 32px;
+            padding: 2.5rem;
+            width: 240px;
+            height: 240px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-align: center;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
             border: 2px solid #334155;
         }
 
         .app-bubble:hover {
-            transform: translateY(-5px);
-            background: #334155;
+            transform: translateY(-12px);
+            background: #1e293b;
             border-color: #38bdf8;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
         }
 
         .app-icon {
-            font-size: 5rem;
-            margin-bottom: 0.5rem;
+            font-size: 6rem;
+            margin-bottom: 1rem;
         }
 
         .app-name {
-            font-weight: 700;
-            font-size: 1.2rem;
+            font-weight: 900;
+            font-size: 1.3rem;
             color: #f8fafc;
         }
 
-        /* Modal Styles */
+        /* Modal / Popup */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -83,9 +92,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 99;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(8px);
         }
 
         .modal {
@@ -95,51 +104,80 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: #1e293b;
-            padding: 2.5rem;
-            border-radius: 24px;
-            border: 1px solid #38bdf8;
+            padding: 3rem;
+            border-radius: 32px;
+            border: 2px solid #38bdf8;
             z-index: 100;
             width: 90%;
-            max-width: 400px;
+            max-width: 450px;
             text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         .modal h3 {
             margin-top: 0;
             color: #38bdf8;
-            font-size: 1.5rem;
+            font-size: 2rem;
         }
 
         .modal p {
-            line-height: 1.6;
+            line-height: 1.8;
             color: #cbd5e1;
+            font-size: 1.1rem;
         }
 
         .close-btn {
             background: #38bdf8;
             color: #0f172a;
             border: none;
-            padding: 12px 0;
-            border-radius: 12px;
+            padding: 16px 0;
+            border-radius: 16px;
             cursor: pointer;
             width: 100%;
-            font-weight: 800;
-            margin-top: 1.5rem;
-            font-size: 1rem;
+            font-weight: 900;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            transition: 0.2s;
         }
 
+        .close-btn:hover {
+            background: #7dd3fc;
+        }
+
+        /* Privacy Section (Required by Apple) */
+        .privacy-section {
+            margin-top: 6rem;
+            padding: 3rem;
+            background: #111827;
+            border-radius: 24px;
+            border: 1px solid #1e293b;
+        }
+
+        .privacy-section h2 {
+            color: #f8fafc;
+            font-size: 1.5rem;
+            margin-top: 0;
+        }
+
+        .privacy-section p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Footer */
         footer {
-            padding: 2rem;
+            padding: 4rem 2rem;
             text-align: center;
             border-top: 1px solid #1e293b;
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #64748b;
         }
 
         footer a {
             color: #38bdf8;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 700;
         }
 
         footer a:hover {
@@ -151,12 +189,23 @@
 <body>
     <header>
         <h1>Public Private Company</h1>
+        <nav>APPS</nav>
     </header>
 
     <div class="container">
         <div class="app-bubble" onclick="openModal()">
             <div class="app-icon">🐟</div>
             <div class="app-name">Squishy Fish Merge</div>
+        </div>
+
+        <div class="privacy-section" id="privacy">
+            <h2>Privacy Policy</h2>
+            <p><strong>Last Updated: February 2026</strong></p>
+            <p>Public Private Company provides Squishy Fish Merge as an Ad Supported app. This service is provided by
+                Public Private Company at no cost and is intended for use as is.</p>
+            <p>Our app uses Chartboost to serve advertisements. Chartboost may collect device identifiers (IDFA, IDFV),
+                IP addresses, and usage data to provide personalized advertising. We do not personally store or sell
+                your private data. You can manage your tracking preferences via the iOS system prompt.</p>
         </div>
     </div>
 
@@ -172,8 +221,15 @@
     </footer>
 
     <script>
-        function openModal() { document.getElementById('modal').style.display = 'block'; document.getElementById('overlay').style.display = 'block'; }
-        function closeModal() { document.getElementById('modal').style.display = 'none'; document.getElementById('overlay').style.display = 'none'; }
+        function openModal() {
+            document.getElementById('modal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
     </script>
 </body>
 
